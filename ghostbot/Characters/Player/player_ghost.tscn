@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyl5manymqsk8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_356hb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsvg0"]
+atlas = null
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qum1"]
+atlas = null
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jlqs"]
+atlas = null
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s8l7f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsvg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsvg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qum1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jlqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jlqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qum1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerGhost" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_356hb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s8l7f")
+frame_progress = 0.811146

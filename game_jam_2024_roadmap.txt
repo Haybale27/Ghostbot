@@ -1,0 +1,69 @@
+Set up: Create github repo.
+(done)a. install godot 4 on both laptops
+(done)b. set up project folder
+c. import assets
+ca. robot
+cb. tilemap
+
+Enemy Concepts:
+1. Turret, mounted anywhere, walls, ceiling, floor.
+2. Big mech on treads with slow rocket boost, not for mobility but just to get to platforms
+3. Little drone that flies
+4. Basic human-form robot.
+
+
+
+1. Core gameplay
+a. Ghost movement
+b. Create robot with basic controls
+c. Possession ability
+d. Design a system that allows stats to transfer into new possessions and
+smoothly hands-off controls between ghost and possession without deleting it
+
+2. Core room mechanics
+a. Create tileset and set layers
+b. When in ghost-form, room dims and possessable robots have higher contrast,
+your ghost becomes visible as well as the evil ghosts in full opacity
+c. When in physical-form, all ghosts have less opacity and room is fully lit
+
+3. Player combat
+a. Create aiming system/mouse tracking
+b. Make bullet script or 2
+
+4. Robot enemies
+a. Create state system of idle, track, and attack
+b. Create movement functions
+c. Create shooting functions
+d. Create Player tracking functions
+
+5. Minions
+a. Add constant timer in ghost-state
+b. Coorelate minion spawns with timer
+3. Add player tracking and basic movement
+4. Add idle state
+
+6. Environmental hazards
+
+
+
+Intermission: By this point switching between ghost and robot state, combat with enemies,
+minion behaviors in ghost-state, and a room or 2 should all be implemented for player testing.
+
+By this point the base game is developed and what needs to be focused on is the 
+roadmap/progression of the game, more robot types, brainstorming of unique items or
+powerups, brainstorming what each floor's unique gimmick is, and making a boss for each floor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
