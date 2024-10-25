@@ -2,8 +2,8 @@ Set up: Create github repo.
 (done)a. install godot 4 on both laptops
 (done)b. set up project folder
 c. import assets
-ca. robot
-cb. tilemap
+(done)ca. robot
+(done)cb. tilemap
 
 Enemy Concepts:
 1. Turret, mounted anywhere, walls, ceiling, floor.
@@ -13,18 +13,18 @@ Enemy Concepts:
 
 
 
-1. Core gameplay
-a. Ghost movement
-b. Create robot with basic controls
-c. Possession ability
-d. Design a system that allows stats to transfer into new possessions and
+(done)1. Core gameplay
+(done)a. Ghost movement
+(done)b. Create robot with basic controls
+(done)c. Possession ability
+(done)d. Design a system that allows stats to transfer into new possessions and
 smoothly hands-off controls between ghost and possession without deleting it
 
-2. Core room mechanics
-a. Create tileset and set layers
-b. When in ghost-form, room dims and possessable robots have higher contrast,
+(done)2. Core room mechanics
+(done)a. Create tileset and set layers
+(done)b. When in ghost-form, room dims and possessable robots have higher contrast,
 your ghost becomes visible as well as the evil ghosts in full opacity
-c. When in physical-form, all ghosts have less opacity and room is fully lit
+(done)c. When in physical-form, all ghosts have less opacity and room is fully lit
 
 3. Player combat
 a. Create aiming system/mouse tracking
