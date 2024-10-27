@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-const ACCELERATION = 500
-const MAX_SPEED = 120
-const FRICTION = 200
+const ACCELERATION = 200
+const MAX_SPEED = 200
+const FRICTION = 150
 
 enum {
 	MOVE,
@@ -54,6 +54,7 @@ func move_state(delta):
 	move()
 
 func idle_state(_delta):
+	velocity = Vector2.ZERO
 	self.position = stats.activeBot.position
 	animate()
 	if stats.ghostMode:

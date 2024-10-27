@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -14,7 +14,9 @@ var ghostReady = false
 var botIsActive = false
 var playerBots = []
 var botID
+var healthBoost = 1
 
+onready var hp = $hp
 
 signal ghost_mode
 signal bot_mode

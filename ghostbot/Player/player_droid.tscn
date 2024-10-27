@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Sprites/ghostbot_player_droid.png" type="Texture" id=1]
 [ext_resource path="res://Player/player_droid.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/ghostbot_player_droid_gun.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
-height = 1.0
+height = 0.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 21.095
+
+[sub_resource type="CircleShape2D" id=3]
 
 [node name="player_droid" type="KinematicBody2D"]
 collision_layer = 5
@@ -16,7 +19,12 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
+scale = Vector2( 0.9, 0.9 )
 shape = SubResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+offset = Vector2( 1.5, 0.5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -29,5 +37,22 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 50, 0 )
+collision_mask = 0
+
+[node name="BulletSpawn" type="Node2D" parent="RayCast2D"]
+position = Vector2( 15, 0 )
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource( 3 )
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_Area2D2_body_entered"]

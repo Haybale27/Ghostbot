@@ -2,5 +2,12 @@
 
 [ext_resource path="res://Player/player_stats.gd" type="Script" id=1]
 
-[node name="player_stats" type="Node"]
+[node name="player_stats" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="hp" type="RichTextLabel" parent="."]
+margin_right = 91.0
+margin_bottom = 45.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

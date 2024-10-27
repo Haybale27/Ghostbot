@@ -25,7 +25,7 @@ func _process(_delta):
 		var ghostlyNodes = get_tree().get_nodes_in_group("Ghostly")
 		for node in ghostlyNodes:
 			if node is CanvasModulate:
-				node.color = color.from_hsv(0, 0, 1, 0.2)
+				node.color = color.from_hsv(0, 0, 1, 0.117)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
