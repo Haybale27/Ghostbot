@@ -6,10 +6,10 @@ c. import assets
 (done)cb. tilemap
 
 Enemy Concepts:
-1. Turret, mounted anywhere, walls, ceiling, floor.
-2. Big mech on treads with slow rocket boost, not for mobility but just to get to platforms
-3. Little drone that flies
-4. Basic human-form robot.
+(done)1. Turret, mounted anywhere, walls, ceiling, floor.
+(done)2. Big mech on treads with slow rocket boost, not for mobility but just to get to platforms
+(done)3. Little drone that flies
+(done)4. Basic human-form robot.
 
 
 
@@ -26,21 +26,21 @@ smoothly hands-off controls between ghost and possession without deleting it
 your ghost becomes visible as well as the evil ghosts in full opacity
 (done)c. When in physical-form, all ghosts have less opacity and room is fully lit
 
-3. Player combat
-a. Create aiming system/mouse tracking
-b. Make bullet script or 2
+(done)3. Player combat
+(done)a. Create aiming system/mouse tracking
+(done)b. Make bullet script or 2
 
-4. Robot enemies
-a. Create state system of idle, track, and attack
-b. Create movement functions
-c. Create shooting functions
-d. Create Player tracking functions
+(done)4. Robot enemies
+(done)a. Create state system of idle, track, and attack
+(done)b. Create movement functions
+(done)c. Create shooting functions
+(done)d. Create Player tracking functions
 
-5. Minions
-a. Add constant timer in ghost-state
-b. Coorelate minion spawns with timer
-3. Add player tracking and basic movement
-4. Add idle state
+(done)5. Minions
+(done)a. Add constant timer in ghost-state
+(done)b. Coorelate minion spawns with timer
+(done)3. Add player tracking and basic movement
+(done)4. Add idle state
 
 6. Environmental hazards
 

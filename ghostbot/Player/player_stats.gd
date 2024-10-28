@@ -8,15 +8,16 @@ export var test = 0
 
 
 var ghostMode = true
-var activeBot
+var activePlayer
 var botReady = false
 var ghostReady = false
 var botIsActive = false
 var playerBots = []
 var botID
-var healthBoost = 1
+var healthBoost = 99
+var hp = "Infinite"
 
-onready var hp = $hp
+onready var enemyGhost = load("res://Enemies/enemy_ghost.tscn")
 
 signal ghost_mode
 signal bot_mode
@@ -31,6 +32,10 @@ func _ready():
 
 func _process(_delta):
 	pass
+
+func respawn(scene):
+	playerBots.clear()
+	scene.reload_current_scene()
 
 func activate_ghost_mode():
 	emit_signal("ghost_mode")

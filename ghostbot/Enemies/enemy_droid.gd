@@ -17,7 +17,9 @@ var id
 var playerDetected = false
 var randDir = Vector2.RIGHT
 var follow = false
-export var hp = 40
+export var hp = 60
+var cooldown = false
+var playerVector = Vector2.ZERO
 
 
 onready var sprite = $Sprite
@@ -39,26 +41,27 @@ func _physics_process(delta):
 
 
 func move_state(delta):
-	move(delta)
-	animate()
-	aim()
-	
 	if stats.ghostMode:
 		state = IDLE
+	else:
+		move(delta)
+		animate()
+		aim()
+		playerVector = (stats.activePlayer.global_position - self.global_position).normalized()
 	
 
 func idle_state(_delta):
-	sprite.rotation_degrees = 0
 	velocity = Vector2.ZERO
 	if !stats.ghostMode:
 		state = MOVE
 		follow = true
+		cooldown = true
+		$Timer2.start()
 
 
 func move(delta):
-	var direction = (stats.activeBot.global_position - self.global_position).normalized()
 	if follow:
-		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+		velocity = velocity.move_toward(playerVector * MAX_SPEED, ACCELERATION * delta)
 	else:
 		velocity = velocity.move_toward(randDir * SLOWER_SPEED, ACCELERATION * delta)
 	velocity = move_and_slide(velocity)
@@ -69,35 +72,40 @@ func move(delta):
 
 
 func animate():
-	var direction = (stats.activeBot.global_position - self.global_position).normalized()
-	if direction.x > 0:
+	if playerVector.x > 0:
 		sprite.flip_h = false
 		sprite.offset.x = 0.5
 		gunSprite.offset.x = 0.5
 	else:
 		sprite.flip_h = true
 		sprite.offset.x = -0.5
-	if direction.y < -0.4:
+	if playerVector.y < -0.4:
 		sprite.rotation_degrees = 25 * sprite.offset.x * -2
-	elif direction.y > 0.4:
+	elif playerVector.y > 0.4:
 		sprite.rotation_degrees = 25 * sprite.offset.x * 2
 	else:
 		sprite.rotation_degrees = 0
 
 func aim():
-	var player = stats.activeBot.global_position
-	raycast.look_at(player)
-	gunSprite.rotation_degrees = raycast.rotation_degrees
+	if !stats.ghostMode:
+		var player = stats.activePlayer.global_position
+		raycast.look_at(player)
+		gunSprite.rotation_degrees = raycast.rotation_degrees
+		raycast.cast_to.x = sqrt(pow((stats.activePlayer.global_position.x - self.global_position.x), 2) + pow((stats.activePlayer.global_position.y - self.global_position.y), 2))
+		if raycast.is_colliding() == false and cooldown == false:
+			shoot()
 
 func shoot():
+	cooldown = true
+	$Timer2.start()
 	var bullet = bulletScene.instance()
 	get_node("/root/Room").call_deferred("add_child", bullet)
-	bullet.shoot($RayCast2D/BulletSpawn.global_position, raycast.rotation_degrees, 1, 1)
+	bullet.shoot($RayCast2D/BulletSpawn.global_position, playerVector, raycast.rotation_degrees, 1, 1)
 
 
 func random_direction():
 	if !stats.ghostMode:
-		var direction = rad2deg(get_angle_to((stats.activeBot.global_position - self.global_position).normalized()))
+		var direction = rad2deg(get_angle_to((stats.activePlayer.global_position - self.global_position).normalized()))
 		var leftOrRight = randi() % 2
 		if leftOrRight == 0:
 			randDir = randDir.rotated(deg2rad(rand_range(direction + 45, direction + 90)))
@@ -127,9 +135,9 @@ func _on_Timer_timeout():
 
 func _on_Timer2_timeout():
 	$Timer2.stop()
-	if state == MOVE:
-		shoot()
-	$Timer2.start()
+	cooldown = false
+
+
 
 
 func _on_Area2D2_body_entered(body):

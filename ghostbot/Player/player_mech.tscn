@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Sprites/player_mech_gun.png" type="Texture" id=1]
+[ext_resource path="res://Player/player_mech.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/player_mech.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 28 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 28 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24, 31 )
+
+[node name="player_mech" type="KinematicBody2D"]
+collision_layer = 5
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+scale = Vector2( 1.25, 0.15 )
+texture = ExtResource( 1 )
+offset = Vector2( 10, 0 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 4 )
+shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 50, 0 )
+collision_mask = 0
+
+[node name="BulletSpawn" type="Node2D" parent="RayCast2D"]
+position = Vector2( 15, 0 )
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2( 0, 3.5 )
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.6
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_Area2D2_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

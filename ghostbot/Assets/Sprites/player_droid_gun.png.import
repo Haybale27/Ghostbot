@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ghostbot_ghost.png-dbd1e06486846d708ce9a1e7a86333a0.stex"
+path="res://.import/player_droid_gun.png-af57421ac48e50e5c072ac24c908d938.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/ghostbot_ghost.png"
-dest_files=[ "res://.import/ghostbot_ghost.png-dbd1e06486846d708ce9a1e7a86333a0.stex" ]
+source_file="res://Assets/Sprites/player_droid_gun.png"
+dest_files=[ "res://.import/player_droid_gun.png-af57421ac48e50e5c072ac24c908d938.stex" ]
 
 [params]
 

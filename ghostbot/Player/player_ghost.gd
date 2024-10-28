@@ -18,6 +18,7 @@ var bot
 onready var sprite = $AnimatedSprite
 
 func _ready():
+	stats.activePlayer = self
 	add_to_group("ghostly")
 	#OS.window_maximized = true
 
@@ -40,25 +41,23 @@ func move_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	animate()
+	stats.hp = "Infinite"
 	
 	if Input.is_action_just_pressed("ui_accept") and stats.transferReady():
 		stats.activate_bot_mode()
 		state = IDLE
-	if Input.is_action_just_pressed("ui_cancel"):
-		stats.spawn_player_droid()
-	if Input.is_action_just_pressed("ui_home"):
-		for i in range(stats.playerBots.size()):
-			print(i, " ", stats.playerBots[i])
 	
 	
 	move()
 
 func idle_state(_delta):
-	velocity = Vector2.ZERO
-	self.position = stats.activeBot.position
-	animate()
 	if stats.ghostMode:
 		state = MOVE
+		stats.activePlayer = self
+	else:
+		velocity = Vector2.ZERO
+		self.position = stats.activePlayer.position
+		animate()
 
 func animate():
 	if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
@@ -80,3 +79,12 @@ func _on_Area2D_area_entered(_area):
 
 func _on_Area2D_area_exited(_area):
 	stats.ghostReady = false
+
+
+
+
+
+func _on_Area2D2_body_entered(_body):
+	var scene = get_tree()
+	stats.respawn(scene)
+	print("help")

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const ACCELERATION = 999
-const MAX_SPEED = 250
+const MAX_SPEED = 300
 const FRICTION = 999
 
 enum {
@@ -14,7 +14,8 @@ var velocity = Vector2.ZERO
 var stats = player_stats
 var transferReady = false
 var id
-var hp = 40 * stats.healthBoost
+var hp = 60 * stats.healthBoost
+var cooldown = false
 
 onready var sprite = $Sprite
 onready var gunSprite = $Sprite2
@@ -44,12 +45,13 @@ func move_state(delta):
 	aim()
 	stats.botIsActive = true
 	$CollisionShape2D.set_deferred("disabled", false)
-	stats.hp.text = "HP: " + str(hp)
+	stats.hp = str(hp)
 	if hp <= 0:
 		stats.activate_ghost_mode()
+		stats.spawn_player_droid()
 		self.queue_free()
 	
-	if Input.is_action_just_pressed("ui_accept") and transferReady:
+	if Input.is_action_just_pressed("switch") and transferReady:
 		stats.activate_ghost_mode()
 		state = IDLE
 	
@@ -60,7 +62,7 @@ func idle_state(_delta):
 	$CollisionShape2D.set_deferred("disabled", true)
 	if !stats.ghostMode and stats.ghostReady and transferReady and !stats.botIsActive and stats.botID == id:
 		state = MOVE
-		stats.activeBot = self
+		stats.activePlayer = self
 
 
 func move(delta):
@@ -95,10 +97,16 @@ func aim():
 	var mouse = get_global_mouse_position()
 	raycast.look_at(mouse)
 	gunSprite.rotation_degrees = raycast.rotation_degrees
-	if Input.is_action_just_pressed("shoot"):
-		var bullet = bulletScene.instance()
-		get_node("/root/Room").call_deferred("add_child", bullet)
-		bullet.shoot($RayCast2D/BulletSpawn.global_position, raycast.rotation_degrees, 1, 1)
+	if Input.is_action_pressed("shoot") and cooldown == false:
+		shoot()
+
+func shoot():
+	cooldown = true
+	$Timer.start()
+	var bullet = bulletScene.instance()
+	get_node("/root/Room").call_deferred("add_child", bullet)
+	bullet.shoot($RayCast2D/BulletSpawn.global_position, get_local_mouse_position().normalized(), raycast.rotation_degrees, 1, 1)
+
 
 func _on_Area2D_area_entered(_area):
 	stats.botReady = true
@@ -113,4 +121,9 @@ func _on_Area2D_area_exited(_area):
 
 func _on_Area2D2_body_entered(body):
 	hp += body.damage
-	print(hp)
+	body.queue_free()
+
+
+func _on_Timer_timeout():
+	$Timer.stop()
+	cooldown = false
