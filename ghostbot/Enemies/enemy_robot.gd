@@ -22,11 +22,12 @@ var id
 var playerDetected = false
 var randDir = Vector2.RIGHT
 var follow = false
-export var hp = 60
+export var hp = 100
 var cooldown = false
 var playerVector = Vector2.ZERO
 var jumping = false
 var initiateJump = false
+var noJump = false
 
 
 onready var jumpTimer = $Timer3
@@ -36,7 +37,7 @@ onready var raycast = $RayCast2D
 onready var bulletScene = load("res://Tilemaps_and_Objects/Hazards/enemy_bullet.tscn")
 
 func _ready():
-	pass
+	add_to_group("Enemy")
 
 func _physics_process(delta):
 	match state:
@@ -92,6 +93,7 @@ func move(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
 	if hp <= 0:
+		stats.check_enemies()
 		self.queue_free()
 	$RichTextLabel.text = "hp: " + str(hp)
 
@@ -149,7 +151,7 @@ func _on_Timer_timeout():
 	if playerDetected == true:
 		$Timer.start()
 	random_direction()
-	if !playerDetected:
+	if !playerDetected and !noJump:
 		follow = true
 
 func _on_Timer2_timeout():

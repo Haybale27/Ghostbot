@@ -11,7 +11,7 @@ var maxAngle = 15
 var state = IDLE
 var stats = player_stats
 var id
-export var hp = 120
+export var hp = 200
 var cooldown = false
 var playerVector
 
@@ -22,7 +22,7 @@ onready var raycast = $RayCast2D
 onready var bulletScene = load("res://Tilemaps_and_Objects/Hazards/enemy_bullet.tscn")
 
 func _ready():
-	pass
+	add_to_group("Enemy")
 
 func _physics_process(_delta):
 	match state:
@@ -39,6 +39,7 @@ func move_state():
 		state = IDLE
 	else:
 		if hp <= 0:
+			stats.check_enemies()
 			self.queue_free()
 		$RichTextLabel.text = "hp: " + str(hp)
 		animate()

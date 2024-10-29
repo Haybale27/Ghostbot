@@ -16,7 +16,6 @@ extents = Vector2( 10, 15.5 )
 [node name="enemy_robot" type="KinematicBody2D"]
 collision_layer = 529
 script = ExtResource( 3 )
-hp = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3.5 )
@@ -66,6 +65,7 @@ __meta__ = {
 wait_time = 0.25
 
 [node name="Timer2" type="Timer" parent="."]
+wait_time = 0.7
 
 [node name="Timer3" type="Timer" parent="."]
 wait_time = 0.25

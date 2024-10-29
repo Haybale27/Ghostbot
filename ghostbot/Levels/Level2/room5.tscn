@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/player_droid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tilemaps_and_Objects/tilemap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/player_ghost.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Tilemaps_and_Objects/player_droid_spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Tilemaps_and_Objects/CanvasModulate.gd" type="Script" id=8]
+[ext_resource path="res://Player/stats_bar.tscn" type="PackedScene" id=9]
+
+[node name="Room" type="Node2D"]
+
+[node name="player_droid_spawner" parent="." instance=ExtResource( 6 )]
+position = Vector2( -272, -144 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.625, 0.64 )
+
+[node name="player_droid" parent="." instance=ExtResource( 1 )]
+position = Vector2( -272, -144 )
+
+[node name="Worldly" type="CanvasLayer" parent="." groups=["Worldly"]]
+follow_viewport_enable = true
+
+[node name="TileMap" parent="Worldly" groups=["Tilemap"] instance=ExtResource( 3 )]
+tile_data = PoolIntArray( -458747, 3, 3, -327690, 0, 4, -327689, 0, 196609, -327688, 0, 196609, -327687, 0, 196609, -327686, 0, 196609, -327685, 0, 196609, -327684, 0, 196609, -327683, 0, 196609, -327682, 0, 196609, -327681, 0, 196609, -393216, 0, 196609, -393215, 0, 196609, -393214, 0, 196609, -393213, 0, 196609, -393212, 0, 196609, -393211, 0, 196609, -393210, 0, 196609, -393209, 0, 196609, -393208, 0, 196609, -393207, 0, 7, -262154, 0, 65539, -327671, 0, 65539, -196618, 0, 65539, -262135, 0, 65539, -131082, 0, 65539, -196599, 0, 65539, -65546, 0, 65539, -131063, 0, 65539, -10, 0, 65539, -65527, 0, 65539, 65526, 0, 65539, 9, 0, 65539, 131062, 0, 65539, 65545, 0, 65539, 196598, 0, 65539, 131081, 0, 65539, 262134, 0, 65539, 196617, 0, 65539, 327670, 0, 65539, 262153, 0, 65539, 393206, 0, 196612, 393207, 0, 196609, 393208, 0, 196609, 393209, 0, 196609, 393210, 0, 196609, 393211, 0, 196609, 393212, 0, 196609, 393213, 0, 196609, 393214, 0, 196609, 393215, 0, 196609, 327680, 0, 196609, 327681, 0, 196609, 327682, 0, 196609, 327683, 0, 196609, 327684, 0, 196609, 327685, 0, 196609, 327686, 0, 196609, 327687, 0, 196609, 327688, 0, 196609, 327689, 0, 196615 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Worldly" groups=["Worldly"]]
+script = ExtResource( 8 )
+
+[node name="stats_bar" parent="Worldly" instance=ExtResource( 9 )]
+margin_left = -320.0
+margin_top = -192.0
+margin_right = -320.0
+margin_bottom = -192.0
+
+[node name="Ghostly" type="CanvasLayer" parent="." groups=["Ghostly"]]
+layer = 2
+follow_viewport_enable = true
+
+[node name="player_ghost" parent="Ghostly" instance=ExtResource( 4 )]
+light_mask = 2
+
+[node name="CanvasModulate2" type="CanvasModulate" parent="Ghostly" groups=["Ghostly"]]
+script = ExtResource( 8 )
+
+[node name="Navigation" type="Node" parent="."]
+
+[node name="TileMap2" parent="Navigation" instance=ExtResource( 3 )]
+visible = false
+collision_layer = 2
+tile_data = PoolIntArray( -458747, 3, 3, -327690, 0, 4, -327689, 0, 196609, -327688, 0, 196609, -327687, 0, 196609, -327686, 0, 196609, -327685, 0, 196609, -327684, 0, 196609, -327683, 0, 196609, -327682, 0, 196609, -327681, 0, 196609, -393216, 0, 196609, -393215, 0, 196609, -393214, 0, 196609, -393213, 0, 196609, -393212, 0, 196609, -393211, 0, 196609, -393210, 0, 196609, -393209, 0, 196609, -393208, 0, 196609, -393207, 0, 7, -262154, 0, 65539, -327671, 0, 65539, -196618, 0, 65539, -262135, 0, 65539, -131082, 0, 65539, -196599, 0, 65539, -65546, 0, 65539, -131063, 0, 65539, -10, 0, 65539, -65527, 0, 65539, 65526, 0, 65539, 9, 0, 65539, 131062, 0, 65539, 65545, 0, 65539, 196598, 0, 65539, 131081, 0, 65539, 262134, 0, 65539, 196617, 0, 65539, 327670, 0, 65539, 262153, 0, 65539, 393206, 0, 196612, 393207, 0, 196609, 393208, 0, 196609, 393209, 0, 196609, 393210, 0, 196609, 393211, 0, 196609, 393212, 0, 196609, 393213, 0, 196609, 393214, 0, 196609, 393215, 0, 196609, 327680, 0, 196609, 327681, 0, 196609, 327682, 0, 196609, 327683, 0, 196609, 327684, 0, 196609, 327685, 0, 196609, 327686, 0, 196609, 327687, 0, 196609, 327688, 0, 196609, 327689, 0, 196615 )

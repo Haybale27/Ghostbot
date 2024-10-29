@@ -49,13 +49,44 @@ your ghost becomes visible as well as the evil ghosts in full opacity
 Intermission: By this point switching between ghost and robot state, combat with enemies,
 minion behaviors in ghost-state, and a room or 2 should all be implemented for player testing.
 
-By this point the base game is developed and what needs to be focused on is the 
-roadmap/progression of the game, more robot types, brainstorming of unique items or
-powerups, brainstorming what each floor's unique gimmick is, and making a boss for each floor.
+Well I have 4 hours left until submission by this point. Fuck.
 
+Anyway,, new todo list in order of most to least importance, hopefully I at least get to powerups.
 
+(done-ish)1. Debug current state of the game
+(no thanks)a. Debug pathfinding if you can even call it that (its not really)
+(done)b. Debug bullet despawns on inactive robots
 
+2. Touch up visuals
+(done)a. Import permanent sprites for robots
+b. Import permanent tileset
+(done)c. Update animations where needed
+d. Random colors for tileset per level
 
+3. Import sounds
+a. shoot noise
+b. damage noise
+c. other noises maybe. idk. i already mentioned the essentials. if i add powerups, import noise for that
+
+4. Balance Combat
+a. give enemy mechs missiles instead of bullets
+b. give turrets heatsinking missiles instead of bullets
+c. sort out health amounts and damage amounts
+
+5. Add music
+a. add menu music I've already made
+b. make game music
+c. add game music
+
+6. Make rooms
+With the rooms, we'll see how much time I have left, but probably just 10 for the game jam. After the game jam I can more fully expand upon the level system and redesign combat and stuff to where different levels have different unique mechanics that build upon each other.
+But for now, 10 rooms. Probably scratch the randomness as well. Make it linear.
+
+4. Add powerups/special abilities/rockets
+a. temporary shield for turret + missile
+b. missile for mech
+c. speed boost for droid
+d. nothin for robot, he dumb
 
 
 

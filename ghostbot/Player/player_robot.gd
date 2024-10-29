@@ -55,6 +55,7 @@ func move_state(delta):
 		aim()
 		stats.botIsActive = true
 		$CollisionShape2D.set_deferred("disabled", false)
+		$Area2D2/CollisionShape2D.set_deferred("disabled", false)
 		stats.hp = str(hp)
 		if hp <= 0:
 			stats.activate_ghost_mode()
@@ -63,9 +64,11 @@ func move_state(delta):
 func idle_state(_delta):
 	velocity = Vector2.ZERO
 	$CollisionShape2D.set_deferred("disabled", true)
+	$Area2D2/CollisionShape2D.set_deferred("disabled", true)
 	if !stats.ghostMode and stats.ghostReady and transferReady and !stats.botIsActive and stats.botID == id:
 		state = MOVE
 		stats.activePlayer = self
+		stats.botID = id
 
 
 

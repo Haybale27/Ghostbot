@@ -18,7 +18,7 @@ var velocity = Vector2()
 var stats = player_stats
 var transferReady = false
 var id
-var hp = 200 * stats.healthBoost
+var hp = 170 * stats.healthBoost
 var cooldown = false
 var jumping = false
 
@@ -54,6 +54,7 @@ func move_state(delta):
 		aim()
 		stats.botIsActive = true
 		$CollisionShape2D.set_deferred("disabled", false)
+		$Area2D2/CollisionShape2D.set_deferred("disabled", false)
 		stats.hp = str(hp)
 		if hp <= 0:
 			stats.activate_ghost_mode()
@@ -62,9 +63,11 @@ func move_state(delta):
 func idle_state(_delta):
 	velocity = Vector2.ZERO
 	$CollisionShape2D.set_deferred("disabled", true)
+	$Area2D2/CollisionShape2D.set_deferred("disabled", true)
 	if !stats.ghostMode and stats.ghostReady and transferReady and !stats.botIsActive and stats.botID == id:
 		state = MOVE
 		stats.activePlayer = self
+		stats.botID = id
 
 
 
@@ -101,9 +104,9 @@ func move(delta):
 func animate():
 	var direction = (get_global_mouse_position() - self.global_position).normalized()
 	if direction.x > 0:
-		sprite.flip_h = false
-	else:
 		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 
 func aim():
 	var mouse = get_global_mouse_position()

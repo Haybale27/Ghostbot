@@ -22,7 +22,7 @@ var id
 var playerDetected = false
 var randDir = Vector2.RIGHT
 var follow = false
-export var hp = 60
+export var hp = 150
 var cooldown = false
 var playerVector = Vector2.ZERO
 var jumping = false
@@ -36,7 +36,7 @@ onready var raycast = $RayCast2D
 onready var bulletScene = load("res://Tilemaps_and_Objects/Hazards/enemy_bullet.tscn")
 
 func _ready():
-	pass
+	add_to_group("Enemy")
 
 func _physics_process(delta):
 	match state:
@@ -92,15 +92,16 @@ func move(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
 	if hp <= 0:
+		stats.check_enemies()
 		self.queue_free()
 	$RichTextLabel.text = "hp: " + str(hp)
 
 
 func animate():
 	if playerVector.x > 0:
-		sprite.flip_h = false
-	else:
 		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 
 func aim():
 	if !stats.ghostMode:

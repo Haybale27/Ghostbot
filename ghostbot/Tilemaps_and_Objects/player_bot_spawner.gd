@@ -11,6 +11,7 @@ func _ready():
 	stats.connect("spawn_player_droid", self, "spawn")
 	stats.connect("ghost_mode", self, "resumeTimer")
 	stats.connect("bot_mode", self, "pauseTimer")
+	spawnGhost()
 
 func spawn():
 	var droid = droidScene.instance()

@@ -20,6 +20,8 @@ onready var sprite = $AnimatedSprite
 func _ready():
 	stats.activePlayer = self
 	add_to_group("ghostly")
+	stats.check_players()
+	stats.activate_ghost_mode()
 	#OS.window_maximized = true
 
 func _physics_process(delta):
@@ -87,4 +89,3 @@ func _on_Area2D_area_exited(_area):
 func _on_Area2D2_body_entered(_body):
 	var scene = get_tree()
 	stats.respawn(scene)
-	print("help")

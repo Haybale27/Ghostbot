@@ -11,7 +11,7 @@ var state = IDLE
 var stats = player_stats
 var transferReady = false
 var id
-var hp = 120 * stats.healthBoost
+var hp = 300 * stats.healthBoost
 var cooldown = false
 var mouseVector
 
@@ -49,6 +49,7 @@ func move_state():
 		aim()
 		stats.botIsActive = true
 		$CollisionShape2D.set_deferred("disabled", false)
+		$Area2D2/CollisionShape2D.set_deferred("disabled", false)
 		stats.hp = str(hp)
 		if hp <= 0:
 			stats.activate_ghost_mode()
@@ -57,9 +58,11 @@ func move_state():
 
 func idle_state():
 	$CollisionShape2D.set_deferred("disabled", true)
+	$Area2D2/CollisionShape2D.set_deferred("disabled", true)
 	if !stats.ghostMode and stats.ghostReady and transferReady and !stats.botIsActive and stats.botID == id:
 		state = MOVE
 		stats.activePlayer = self
+		stats.botID = id
 		cooldown = true
 		$Timer.start()
 
